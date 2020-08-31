@@ -1,0 +1,3 @@
+Implementei o item f criando a interface "Colorido" e a classe QuadradoColorido, que extende 
+a classe Quadrado e implementa a interface colorido, para criarmos novos objetos coloridos,
+devemos criar novas classes que implementem a interface.

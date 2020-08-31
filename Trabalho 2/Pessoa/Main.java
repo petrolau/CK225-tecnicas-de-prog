@@ -60,3 +60,5 @@ class Main{
                     
 //6 errors
 
+//Construtor nao definido.
+
