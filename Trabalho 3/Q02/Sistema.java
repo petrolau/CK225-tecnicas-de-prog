@@ -1,49 +1,91 @@
-import conta.*;
+import java.util.ArrayList;
 
-class Sistema {
+public class Sistema {
 
-    private Conta[] contas = new Conta[1];
+    ArrayList<Conta> contas = new ArrayList<Conta>();
+    int maiorId;
 
-    // Polimorfismo de sobrecarga
-    void criarContaXPTOBasic(int id) {
-        Conta basic = new Basic(id);
-    }
-    void criarContaXPTOBasic(int id, double saldo) {
-        Conta basic = new Basic(id, saldo);
-    }
-
-    // Polimorfismo de sobrecarga
-    void criarContaXPTOPlus(int id) {
-        Conta plus = new Plus(id);
-    }
-    void criarContaXPTOPlus(int id, double saldo) {
-        Conta plus = new Plus(id, saldo);
+    public void criarContaXPTOBasic(int id) {
+        compararId(id);
+        if(searchById(id)==null)
+            contas.add(new Basic(id));
+        else
+            System.out.println("Falha ao criar conta,id repetido");
+        
     }
 
-    // Polimorfismo de sobrecarga
-    void criarContaXPTOExtreme(int id) {
-        Conta extreme = new Extreme(id);
-    }
-    void criarContaXPTOExtreme(int id, double saldo) {
-        Conta extreme = new Extreme(id, saldo);
+    public void criarContaXPTOPlus(int id) {
+        compararId(id);
+        if(searchById(id)==null)
+            contas.add(new Plus(id));
+        else
+            System.out.println("Falha ao criar conta,id repetido");
     }
 
-    Conta contaPorID(int id) {
-        for(int i = 0; i < this.contas.length; i++) {
-            if(this.contas[i].getID() == id) return this.contas[i];
+    public void criarContaXPTOExtreme(int id) {
+        compararId(id);
+        if(searchById(id)==null)
+            contas.add(new Extreme(id));
+        else
+            System.out.println("Falha ao criar conta,id repetido");
+    }
+
+    public void creditar(int id,double valor){
+        try{
+            searchById(id).creditar(valor);       
+        }catch(NullPointerException n){           
+            System.out.println("ID invalido");
+        }
+    }
+    
+    public void debitar(int id,double valor){
+        try{
+            searchById(id).debitar(valor);
+        }catch(NullPointerException n){
+            System.out.println("ID invalido");
+        }
+    }
+
+    public double consultarSaldo(int id){
+        try{
+            return searchById(id).consultarSaldo();
+        }catch(NullPointerException e){
+            System.out.println("ID inválido");
+        }
+        return 0.0;
+    }
+
+    public Conta searchById(int id){
+        for(Conta c:contas){
+            if(c.getID()==id){
+                return c;
+            }
         }
         return null;
     }
 
-    void creditar(int id, double valor) {
-        contaPorID(id).creditar(valor);
+    // Polimorfismo de sobrecarga -> Metodo com mesmo nome e assinatura diferente.
+    public void criarContaXPTOBasic() {
+        criarContaXPTOBasic(++maiorId);
     }
 
-    void debitar(int id, double valor) {
-        contaPorID(id).debitar(valor);
+    // Polimorfismo de sobrecarga -> Metodo com mesmo nome e assinatura diferente.
+    
+    public void criarContaXPTOPlus() {
+        criarContaXPTOPlus(++maiorId);
     }
 
-    double consultarSaldo(int id) {
-        return contaPorID(id).consultarSaldo();
+    // Polimorfismo de sobrecarga -> Metodo com mesmo nome e assinatura diferente.
+    
+    public void criarContaXPTOExtreme() {
+        criarContaXPTOExtreme(++maiorId);
+    }
+    // Polimorfismo de sobrecarga -> Metodo com mesmo nome e assinatura diferente.
+
+    private void compararId(int id) {
+        if (id > maiorId) {
+            maiorId = id;
+        }
+
     }
 }

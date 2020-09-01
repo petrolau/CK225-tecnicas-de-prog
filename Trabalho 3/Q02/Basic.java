@@ -6,7 +6,7 @@ class Basic extends Conta {
         super(id, "basic");
     }
 
-    //Polimorfismo de sobrecarga -> Metodo com mesmo nome e assinatura diferente.
+    //Polimorfismo de sobrecarga -> 
     Basic(int id, double saldo) {
         super(id,saldo,"basic");
     }

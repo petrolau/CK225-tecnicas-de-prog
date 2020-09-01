@@ -33,7 +33,7 @@ public class Main {
         Figura f6 = new CirculoColorido(p1,6,1);
         System.out.println(f6);
 
-        Figura[] figuras
+        
         
         
         
