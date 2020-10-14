@@ -1,7 +1,6 @@
 public class Main {
 
     public static void main(String[] args){
-        int tamanho = 10;
 
         Ponto p1 = new Ponto(2,3);
         //Ate o item e)
@@ -33,7 +32,6 @@ public class Main {
         Figura f6 = new CirculoColorido(p1,6,1);
         System.out.println(f6);
 
-        
         
         
         
