@@ -13,23 +13,24 @@ public final class RandomGaussian {
         double MEAN = 100.0f;
         double VARIANCE = 5.0f;
         for (int idx = 1; idx <= 10; idx++) {
-            write(String.valueOf(gaussian.getGaussian(MEAN, VARIANCE))+ "\n" );
+            //saída desta classe seja gravada em um arquivo
+            escreverTexto(String.valueOf(gaussian.getGaussian(MEAN, VARIANCE))+ "\n" );
         }
-        
-        read();
+        //ler o arquivo gerado e apresentá-lo na saída padrão.
+        LerArquivo();
     }
     private Random fRandom = new Random();
     private double getGaussian(double aMean, double aVariance) {
         return aMean + fRandom.nextGaussian()*aVariance;
     }
 
-    private static void write( String pTextoEscrever) {
+    private static void escreverTexto( String pTextoEscrever) {
         try (
-            FileWriter create = new FileWriter("gaussian.txt", true);
-            BufferedWriter buffer = new BufferedWriter(create);
-            PrintWriter write = new PrintWriter(buffer);
+            FileWriter criadorArquivo = new FileWriter("random.txt", true);
+            BufferedWriter buffer = new BufferedWriter(criadorArquivo);
+            PrintWriter escritorArquivos = new PrintWriter(buffer);
         ) {
-            write.append(pTextoEscrever);
+            escritorArquivos.append(pTextoEscrever);
             
         }
         catch(IOException e) {
@@ -37,13 +38,13 @@ public final class RandomGaussian {
         }
     }
 
-    private static void read() {
+    private static void LerArquivo() {
         try (
-            BufferedReader bufferLer = new BufferedReader(new FileReader("gaussian.txt"));
+            BufferedReader bufferLer = new BufferedReader(new FileReader("random.txt"));
         ) {
-            String line = "";
-            while ((line = bufferLer.readLine()) != null) {
-                System.out.println(line + "linha");
+            String linha = "";
+            while ((linha = bufferLer.readLine()) != null) {
+                System.out.println(linha + "linha");
              } 
         }
         catch(IOException e) {
